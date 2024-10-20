@@ -250,6 +250,7 @@ h1::after {
 }
 
 .skill-item {
+    cursor: pointer;
     width: 30%;
 }
 
