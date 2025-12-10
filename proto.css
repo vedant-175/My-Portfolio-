@@ -95,7 +95,7 @@ textarea {
 /* Header styling */
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 20px;
     background-color: rgba(40, 40, 50, 0.9);
@@ -193,7 +193,7 @@ header nav a.active {
 }
 
 /* Section Styling */
-#edu, #skills, #achivements, #contact {
+#edu, #skills, #achievements, #contact {
     padding: 50px 0;
     background: rgba(50, 50, 60, 0.9);
     box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -250,7 +250,6 @@ h1::after {
 }
 
 .skill-item {
-    cursor: pointer;
     width: 30%;
 }
 
@@ -389,7 +388,7 @@ textarea {
 /* Header styling */
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 20px;
     background-color: rgb(40, 40, 50);
@@ -546,6 +545,3 @@ h1 {
         margin-bottom: 30px;
     }
 }
-
-
-
