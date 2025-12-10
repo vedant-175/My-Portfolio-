@@ -193,7 +193,7 @@ header nav a.active {
 }
 
 /* Section Styling */
-#edu, #skills, #contact {
+#edu, #skills, #achivements, #contact {
     padding: 50px 0;
     background: rgba(50, 50, 60, 0.9);
     box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.6);
@@ -546,5 +546,6 @@ h1 {
         margin-bottom: 30px;
     }
 }
+
 
 
