@@ -2,8 +2,6 @@
 
 An interactive, high-performance 3D developer portfolio showcasing full-stack projects, achievements, and technical expertise. Built with **React 19**, **Three.js / React Three Fiber**, and **GSAP ScrollTrigger**.
 
-![Portfolio Preview](/public/profile.jpg)
-
 ## ✨ Features
 
 - **Interactive 3D Scene**: Custom animated 3D DNA Helix structure with glowing particle nodes and dynamic starfield rendered using `@react-three/fiber` and `@react-three/postprocessing`.
