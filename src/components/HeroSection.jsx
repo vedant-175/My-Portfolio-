@@ -144,10 +144,6 @@ export default function HeroSection() {
               className="w-full h-full object-cover object-[center_15%] rounded-full"
             />
           </div>
-          <div 
-            className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-[#3ee6a8] border-2 border-black shadow-[0_0_8px_#3ee6a8]" 
-            title="Available for opportunities" 
-          />
         </div>
 
         <h1 className={`hero-title text-4xl sm:text-6xl md:text-8xl font-black leading-none tracking-tighter text-white uppercase select-none pointer-events-none mb-4 whitespace-nowrap ${fonts[fontIndex]}`}>
