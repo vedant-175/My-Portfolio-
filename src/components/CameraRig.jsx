@@ -15,16 +15,17 @@ export default function CameraRig() {
     // Exact mapping (scrubbed by GSAP already)
     const targetY = THREE.MathUtils.lerp(startY, endY, progress)
 
-    // Side-view camera offset
-    // X = 12 units to the right
-    // Z = 0 (vertically aligned with helix)
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, 12, 0.05)
+    // Side-view camera offset - adapt for mobile portrait aspect ratio
+    const isMobile = state.size.width < 768
+    const desiredX = isMobile ? 16 : 12
+    const desiredLookAtX = isMobile ? 0 : -3
+
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, desiredX, 0.05)
     camera.position.z = 0
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY, 0.1)
     
-    // Look straight ahead at the helix's current Y level, but slightly left (-3)
-    // so the helix remains on the right side of the viewport.
-    camera.lookAt(-3, targetY, 0)
+    // Look straight ahead at the helix's current Y level
+    camera.lookAt(desiredLookAtX, targetY, 0)
   })
   
   return null

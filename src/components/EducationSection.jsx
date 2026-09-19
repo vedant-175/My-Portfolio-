@@ -60,8 +60,8 @@ export default function EducationSection() {
     <section ref={sectionRef} id="education" className="relative w-full h-screen flex items-center justify-center pointer-events-none px-6 overflow-hidden">
       
       {/* Floating Adjectives */}
-      <div className="floating-adj-edu absolute top-[20%] left-[10%] font-serif italic text-white/10 text-3xl sm:text-5xl pointer-events-none z-0">Focus</div>
-      <div className="floating-adj-edu absolute bottom-[20%] right-[5%] font-serif italic text-white/10 text-2xl sm:text-4xl pointer-events-none z-0">Iteration</div>
+      <div className="floating-adj-edu absolute top-[20%] left-[10%] font-serif italic text-white/5 sm:text-white/10 text-2xl sm:text-5xl pointer-events-none z-0 hidden sm:block">Focus</div>
+      <div className="floating-adj-edu absolute bottom-[20%] right-[5%] font-serif italic text-white/5 sm:text-white/10 text-2xl sm:text-4xl pointer-events-none z-0 hidden sm:block">Iteration</div>
       
       <div className="max-w-3xl w-full relative pointer-events-auto group z-10">
         
@@ -83,29 +83,29 @@ export default function EducationSection() {
         </svg>
 
         {/* Content Card */}
-        <div className="education-content relative z-10 bg-black/60 backdrop-blur-md rounded-2xl p-8 sm:p-12 shadow-[0_0_20px_rgba(0,0,0,0.8)] border border-white/5">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="education-content relative z-10 bg-black/60 backdrop-blur-md rounded-2xl p-5 sm:p-8 md:p-12 shadow-[0_0_20px_rgba(0,0,0,0.8)] border border-white/5">
+          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20 shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path d="M12 14l9-5-9-5-9 5 9 5z" />
                 <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
               </svg>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-sans font-black uppercase tracking-widest text-white">
+            <h2 className="text-xl sm:text-3xl font-sans font-black uppercase tracking-widest text-white">
               Education
             </h2>
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-serif italic text-white tracking-wide">
+          <div className="flex flex-col gap-1.5 sm:gap-2">
+            <h3 className="text-lg sm:text-xl font-serif italic text-white tracking-wide">
               Lovely Professional University (LPU)
             </h3>
-            <div className="text-[#3ee6a8] font-sans font-bold tracking-widest uppercase text-xs mb-4 mt-2">
+            <div className="text-[#3ee6a8] font-sans font-bold tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4 mt-1">
               B.Tech in Computer Science and Engineering
             </div>
             
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-400 text-sm font-sans mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-400 text-xs sm:text-sm font-sans mb-4">
               <div className="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -122,9 +122,9 @@ export default function EducationSection() {
               </div>
             </div>
             
-            <div className="inline-block px-4 py-2 bg-white/5 border border-white/20 rounded-md self-start font-sans">
-              <span className="text-gray-400 uppercase tracking-widest text-xs mr-2">CGPA</span>
-              <span className="text-xl font-bold text-white">8.54</span>
+            <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-white/5 border border-white/20 rounded-md self-start font-sans">
+              <span className="text-gray-400 uppercase tracking-widest text-[10px] sm:text-xs mr-2">CGPA</span>
+              <span className="text-lg sm:text-xl font-bold text-white">8.54</span>
             </div>
           </div>
         </div>

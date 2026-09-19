@@ -129,54 +129,54 @@ export default function AchievementsSection() {
       </div>
       
       {/* Subtle Section Header positioned cleanly below the navbar, out of card flow */}
-      <div className="achievements-header absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none">
-        <span className="text-xs uppercase tracking-[0.3em] font-sans text-[#3ee6a8] font-bold px-4 py-1.5 rounded-full bg-[#3ee6a8]/10 border border-[#3ee6a8]/20 backdrop-blur-md">
+      <div className="achievements-header absolute top-16 sm:top-24 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none">
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-sans text-[#3ee6a8] font-bold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#3ee6a8]/10 border border-[#3ee6a8]/20 backdrop-blur-md">
           Achievements
         </span>
       </div>
 
       {/* 
-        Viewport Content Area: Strictly bounded below the top navbar (72px - 80px).
+        Viewport Content Area: Strictly bounded below the top navbar (64px - 80px).
         Every child slot fills this exact area with flex centering, guaranteeing that
         each card's vertical midpoint equals:
         center-y = navbarHeight + (viewportHeight - navbarHeight) / 2
       */}
-      <div className="absolute top-[72px] sm:top-[80px] bottom-0 left-0 right-0 pointer-events-none overflow-hidden">
+      <div className="absolute top-[64px] sm:top-[80px] bottom-0 left-0 right-0 pointer-events-none overflow-hidden">
         {achievements.map((item, idx) => (
           <div 
             key={idx} 
-            className="achievement-slot absolute inset-0 flex items-center justify-center px-6 pointer-events-none"
+            className="achievement-slot absolute inset-0 flex items-center justify-center px-4 sm:px-6 pointer-events-none"
           >
             <div 
-              className="achievement-card w-full max-w-2xl pointer-events-auto bg-black/60 backdrop-blur-xl border border-white/40 rounded-2xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row gap-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300"
+              className="achievement-card w-full max-w-2xl pointer-events-auto bg-black/60 backdrop-blur-xl border border-white/40 rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300 max-h-[80vh] overflow-y-auto sm:overflow-visible"
             >
-              <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-4xl shrink-0 shadow-inner">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl sm:text-4xl shrink-0 shadow-inner">
                 {item.icon}
               </div>
 
-              <div className="flex-1 w-full text-center md:text-left">
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2">
-                  <span className="text-[11px] font-mono tracking-widest text-[#3ee6a8] uppercase bg-[#3ee6a8]/10 px-2 py-0.5 rounded border border-[#3ee6a8]/20">
+              <div className="flex-1 w-full text-center sm:text-left">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mb-1.5 sm:mb-2">
+                  <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#3ee6a8] uppercase bg-[#3ee6a8]/10 px-2 py-0.5 rounded border border-[#3ee6a8]/20">
                     0{idx + 1} / 0{achievements.length}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-serif italic text-white tracking-wide">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-serif italic text-white tracking-wide">
                     {item.title}
                   </h3>
                   {item.tag && (
-                    <span className="px-2.5 py-0.5 bg-[#3ee6a8]/20 border border-[#3ee6a8]/50 text-[#3ee6a8] text-[10px] uppercase tracking-widest font-sans rounded-full">
+                    <span className="px-2 py-0.5 bg-[#3ee6a8]/20 border border-[#3ee6a8]/50 text-[#3ee6a8] text-[9px] sm:text-[10px] uppercase tracking-widest font-sans rounded-full">
                       {item.tag}
                     </span>
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-base sm:text-lg font-serif italic mb-3">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-base font-serif italic mb-2 sm:mb-3">
                   <span className="text-[#3ee6a8]">{item.role}</span>
-                  <span className="text-gray-600">|</span>
-                  <span className="text-gray-400 text-sm font-sans">{item.date}</span>
+                  <span className="text-gray-600 hidden sm:inline">|</span>
+                  <span className="text-gray-400 text-xs sm:text-sm font-sans">{item.date}</span>
                 </div>
 
                 {item.description && (
-                  <p className="text-gray-300 text-sm sm:text-base font-serif leading-relaxed">
+                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-serif leading-relaxed">
                     {item.description}
                   </p>
                 )}

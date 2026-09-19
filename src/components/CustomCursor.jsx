@@ -75,7 +75,7 @@ export default function CustomCursor() {
   if (typeof window === 'undefined') return null
 
   return (
-    <>
+    <div className="hidden md:block">
       {/* Dot */}
       <div 
         ref={dotRef}
@@ -89,6 +89,6 @@ export default function CustomCursor() {
         className={`fixed top-0 left-0 w-10 h-10 -ml-5 -mt-5 border border-[#3ee6a8]/50 rounded-full pointer-events-none z-[99] transition-all duration-200 ease-out ${isVisible ? 'opacity-100' : 'opacity-0'} ${isHovering ? 'scale-150 border-[#3ee6a8] bg-[#3ee6a8]/10' : 'scale-100'}`}
         style={{ willChange: 'transform, transform' }}
       />
-    </>
+    </div>
   )
 }
