@@ -1,13 +1,11 @@
 export const SECTION_CONFIG = [
-  { id: 'hero', weight: 1, navOffset: 0 },
-  { id: 'about', weight: 1, navOffset: 0.2 },
-  { id: 'skills', weight: 1, navOffset: 0.25 },
-  { id: 'transition_projects', weight: 0.6, navOffset: 0.3 },
-  { id: 'projects', weight: 2.5, navOffset: 0.25 }, // Needs more space for sequential cards
-  { id: 'transition_achievements', weight: 0.6, navOffset: 0.3 },
-  { id: 'achievements', weight: 3.4, navOffset: 0.20 },
-  { id: 'education', weight: 0.8, navOffset: 0.2 },
-  { id: 'contact', weight: 0.8, navOffset: 0.85 },
+  { id: 'hero', weight: 1.0, navOffset: 0.0 },
+  { id: 'about', weight: 1.0, navOffset: 0.5 },
+  { id: 'skills', weight: 1.0, navOffset: 0.5 },
+  { id: 'projects', weight: 1.2, navOffset: 0.5 },
+  { id: 'achievements', weight: 1.2, navOffset: 0.5 },
+  { id: 'education', weight: 1.0, navOffset: 0.5 },
+  { id: 'contact', weight: 1.0, navOffset: 0.85 },
 ]
 
 /**
@@ -34,7 +32,7 @@ export function computeSectionRanges(totalScrollHeight) {
       animStart: currentStart + (length * 0.1),
       animEnd: isLast ? end : end - (length * 0.1),
       // Nav scroll target: lands the user squarely on settled content, bypassing buffer & enter animations
-      navTarget: currentStart + (length * (section.navOffset !== undefined ? section.navOffset : (isLast ? 0.85 : 0.25))),
+      navTarget: currentStart + (length * (section.navOffset !== undefined ? section.navOffset : (isLast ? 0.85 : 0.5))),
     }
     
     // Hard validation against overlap
@@ -49,8 +47,5 @@ export function computeSectionRanges(totalScrollHeight) {
     currentStart = end
   })
 
-  // Console log explicitly as requested
-  console.table(ranges)
-  
   return ranges
 }

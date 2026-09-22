@@ -19,73 +19,29 @@ export default function AchievementsSection() {
       }
     })
 
-    // Container fade in
-    tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0)
+    // Container and header fade in
+    tl.fromTo(sectionRef.current, 
+      { opacity: 0, y: 30, scale: 0.98 }, 
+      { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: 'power2.out' }
+    )
 
-    // Floating adjectives fade in
-    tl.fromTo('.floating-adj-ach', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0)
+    // Achievement cards stagger in
+    tl.fromTo('.achievement-card-grid',
+      { opacity: 0, y: 20, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.2, stagger: 0.05, ease: 'power2.out' },
+      "-=0.1"
+    )
 
-    // Header fade in
-    tl.fromTo('.achievements-header', { opacity: 0, y: -10 }, { opacity: 1, y: 0, duration: 0.2 }, 0)
+    // Hold all 3 cards fully visible for reading
+    tl.to({}, { duration: 0.65 })
 
-    // Independent drift animation for adjectives
-    gsap.to('.floating-adj-ach', {
-      y: '+=20',
-      x: '-=10',
-      duration: 3.5 + Math.random(),
-      ease: 'sine.inOut',
-      yoyo: true,
-      repeat: -1,
-      stagger: {
-        each: 0.5,
-        from: 'random'
-      }
+    // Fade out as leaving
+    tl.to(sectionRef.current, {
+      opacity: 0,
+      y: -20,
+      duration: 0.15,
+      ease: 'power2.in'
     })
-
-    const slots = gsap.utils.toArray('.achievement-slot')
-    const cards = gsap.utils.toArray('.achievement-card')
-
-    // Initial State: all cards hidden and offset slightly below resting position
-    gsap.set(cards, { autoAlpha: 0, y: 40, scale: 0.95 })
-    gsap.set(slots, { pointerEvents: 'none' })
-
-    const totalCards = cards.length
-
-    cards.forEach((card, i) => {
-      const slot = slots[i]
-      const step = 1.0
-      const start = 0.1 + i * step
-      const enterEnd = start + 0.25
-      const holdEnd = start + 0.75
-      const exitEnd = start + 1.0
-
-      // Enable pointer events on active slot
-      tl.set(slot, { pointerEvents: 'auto' }, start)
-
-      // Enter tween: slide and fade up to TRUE vertical center (resting position y: 0)
-      tl.fromTo(card, 
-        { autoAlpha: 0, y: 40, scale: 0.95 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.25, ease: 'power2.out' },
-        start
-      )
-
-      // Hold at true vertical center for comfortable reading
-      tl.to({}, { duration: 0.5 }, enterEnd)
-
-      // Exit tween: slide up and fade out before next card enters
-      tl.to(card, 
-        { autoAlpha: 0, y: -30, scale: 0.95, duration: 0.25, ease: 'power2.in' },
-        holdEnd
-      )
-
-      // Disable pointer events on exited slot
-      tl.set(slot, { pointerEvents: 'none' }, exitEnd)
-    })
-
-    // Container fade out at end of section
-    const exitStartTime = 0.1 + totalCards * 1.0
-    tl.to(sectionRef.current, { opacity: 0, duration: 0.2 }, exitStartTime)
-    tl.to({}, { duration: 0.1 }, exitStartTime + 0.2)
 
   }, { scope: sectionRef, dependencies: [range] })
 
@@ -94,23 +50,25 @@ export default function AchievementsSection() {
       title: "GirlScript Summer of Code",
       role: "GSSoC'26 Ambassador & Contributor",
       date: "May - August 2026",
-      description: "Contributed to numerous open-source projects, resolving critical issues, optimizing performance, and collaborating closely with global maintainers.",
-      icon: "🚀"
+      description: "Contributed to open-source codebases, resolving issues, optimizing performance, and collaborating closely with global maintainers.",
+      icon: "🚀",
+      tag: "Open Source"
     },
     {
       title: "Web-a-Thon 2.0",
       role: "Finalist (Top 15 among 100+ teams)",
       date: "February 2026",
-      description: "Developed an innovative full-stack application under 48 hours, recognized for best technical execution and user experience by industry judges.",
+      description: "Developed an innovative full-stack application under 48 hours, recognized for best technical execution and UX by industry judges.",
       icon: "🏆",
-      highlight: true
+      tag: "Top 15"
     },
     {
       title: "Code-a-Haunt 2.0",
       role: "Finalist (Top 20 among 100+ teams)",
       date: "February 2025",
-      description: "Built a complex algorithmic solution and web application during a rigorous hackathon, showcasing rapid prototyping skills.",
-      icon: "👻"
+      description: "Built a complex algorithmic solution and full-stack prototype during a rigorous competitive hackathon environment.",
+      icon: "👻",
+      tag: "Top 20"
     }
   ]
 
@@ -118,69 +76,61 @@ export default function AchievementsSection() {
     <section 
       ref={sectionRef} 
       id="achievements" 
-      className="relative w-full h-screen pointer-events-none overflow-hidden"
+      className="relative w-full h-screen flex flex-col items-center justify-center pointer-events-none px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      {/* Floating Adjectives */}
-      <div className="floating-adj-ach absolute top-[20%] left-[6%] font-serif italic text-white/10 text-4xl sm:text-6xl pointer-events-none z-0 select-none">
-        Rigor
-      </div>
-      <div className="floating-adj-ach absolute bottom-[15%] right-[8%] font-serif italic text-white/10 text-3xl sm:text-5xl pointer-events-none z-0 select-none">
-        Depth
-      </div>
-      
-      {/* Subtle Section Header positioned cleanly below the navbar, out of card flow */}
-      <div className="achievements-header absolute top-16 sm:top-24 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none">
-        <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-sans text-[#3ee6a8] font-bold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full bg-[#3ee6a8]/10 border border-[#3ee6a8]/20 backdrop-blur-md">
-          Achievements
+      {/* Header */}
+      <div className="text-center mb-5 sm:mb-6 pointer-events-auto">
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] font-sans text-[#3ee6a8] font-bold px-3.5 py-1 rounded-full bg-[#3ee6a8]/10 border border-[#3ee6a8]/20 backdrop-blur-md">
+          Recognition & Honors
         </span>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-white mt-2">
+          Achievements
+        </h2>
       </div>
 
-      {/* 
-        Viewport Content Area: Strictly bounded below the top navbar (64px - 80px).
-        Every child slot fills this exact area with flex centering, guaranteeing that
-        each card's vertical midpoint equals:
-        center-y = navbarHeight + (viewportHeight - navbarHeight) / 2
-      */}
-      <div className="absolute top-[64px] sm:top-[80px] bottom-0 left-0 right-0 pointer-events-none overflow-hidden">
+      {/* 3-Card Grid displaying ALL 3 achievements simultaneously */}
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pointer-events-auto max-h-[78vh] overflow-y-auto sm:overflow-visible">
         {achievements.map((item, idx) => (
           <div 
             key={idx} 
-            className="achievement-slot absolute inset-0 flex items-center justify-center px-4 sm:px-6 pointer-events-none"
+            className="achievement-card-grid relative bg-[#0a0a0a]/85 backdrop-blur-xl border border-white/20 p-5 sm:p-6 rounded-xl shadow-2xl flex flex-col justify-between hover:border-[#3ee6a8]/50 hover:shadow-[0_0_30px_rgba(62,230,168,0.15)] transition-all duration-300 group"
           >
-            <div 
-              className="achievement-card w-full max-w-2xl pointer-events-auto bg-black/60 backdrop-blur-xl border border-white/40 rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300 max-h-[80vh] overflow-y-auto sm:overflow-visible"
-            >
-              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl sm:text-4xl shrink-0 shadow-inner">
-                {item.icon}
-              </div>
-
-              <div className="flex-1 w-full text-center sm:text-left">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 mb-1.5 sm:mb-2">
-                  <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#3ee6a8] uppercase bg-[#3ee6a8]/10 px-2 py-0.5 rounded border border-[#3ee6a8]/20">
-                    0{idx + 1} / 0{achievements.length}
+            <div>
+              {/* Top row with icon & badge */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl shadow-inner group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono tracking-widest text-[#3ee6a8] uppercase bg-[#3ee6a8]/10 px-2 py-0.5 rounded border border-[#3ee6a8]/20">
+                    0{idx + 1}
                   </span>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-serif italic text-white tracking-wide">
-                    {item.title}
-                  </h3>
                   {item.tag && (
-                    <span className="px-2 py-0.5 bg-[#3ee6a8]/20 border border-[#3ee6a8]/50 text-[#3ee6a8] text-[9px] sm:text-[10px] uppercase tracking-widest font-sans rounded-full">
+                    <span className="px-2 py-0.5 bg-white/5 border border-white/10 text-gray-300 text-[9px] uppercase tracking-widest font-sans rounded">
                       {item.tag}
                     </span>
                   )}
                 </div>
-
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3 text-xs sm:text-base font-serif italic mb-2 sm:mb-3">
-                  <span className="text-[#3ee6a8]">{item.role}</span>
-                  <span className="text-gray-600 hidden sm:inline">|</span>
-                  <span className="text-gray-400 text-xs sm:text-sm font-sans">{item.date}</span>
-                </div>
-
-                {item.description && (
-                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-serif leading-relaxed">
-                    {item.description}
-                  </p>
-                )}
               </div>
+
+              {/* Title & Role */}
+              <h3 className="text-lg sm:text-xl font-serif italic text-white tracking-wide mb-1 group-hover:text-[#3ee6a8] transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-xs sm:text-sm font-sans font-semibold text-[#3ee6a8] mb-2">
+                {item.role}
+              </p>
+
+              {/* Description */}
+              <p className="text-gray-300 text-xs sm:text-sm font-serif leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+
+            {/* Date footer */}
+            <div className="pt-3 mt-4 border-t border-white/10 flex items-center justify-between text-gray-400 text-xs font-sans">
+              <span>{item.date}</span>
+              <span className="text-[#3ee6a8] text-xs">★</span>
             </div>
           </div>
         ))}

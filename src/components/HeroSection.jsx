@@ -28,14 +28,15 @@ export default function HeroSection() {
         if (entries[0].isIntersecting) {
           intervalRef.current = setInterval(() => {
             gsap.to('.hero-title', {
-              opacity: 0.3,
-              duration: 0.02,
+              opacity: 0.25,
+              duration: 0.15,
+              ease: 'power2.in',
               onComplete: () => {
                 setFontIndex((prev) => (prev + 1) % fonts.length)
-                gsap.to('.hero-title', { opacity: 1, duration: 0.05 })
+                gsap.to('.hero-title', { opacity: 1, duration: 0.2, ease: 'power2.out' })
               }
             })
-          }, 500)
+          }, 1300)
         } else {
           if (intervalRef.current) clearInterval(intervalRef.current)
         }

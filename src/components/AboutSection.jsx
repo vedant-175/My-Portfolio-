@@ -20,13 +20,10 @@ export default function AboutSection() {
       }
     })
 
-    // Container fades in/out quickly so it's fully visible
-    tl.fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 0.1 })
-    
-    // Quick fade in for words
-    tl.fromTo('.about-paragraph .split-word',
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, duration: 0.2, stagger: 0.01, ease: 'power2.out' }
+    // Entire section fades and slides gently into view
+    tl.fromTo(sectionRef.current, 
+      { opacity: 0, y: 25, scale: 0.98 }, 
+      { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: 'power2.out' }
     )
     
     // Floating adjectives fade in
@@ -47,23 +44,24 @@ export default function AboutSection() {
     })
     
     // Hold it fully visible
-    tl.to({}, { duration: 0.6 })
+    tl.to({}, { duration: 0.65 })
 
     // Container fades out as it leaves
-    tl.to(sectionRef.current, { opacity: 0, duration: 0.1 })
+    tl.to(sectionRef.current, { opacity: 0, y: -20, duration: 0.15, ease: 'power2.in' })
 
   }, { scope: sectionRef, dependencies: [range] })
 
   const paragraphText = "I am a Computer Science Engineering student currently pursuing my B.Tech degree. My focus is entirely on building robust, practical software products and scalable full-stack web applications. By blending solid engineering principles with modern frameworks like React and Node.js, I create experiences that are both technically sound and highly engaging."
 
   return (
-    <section ref={sectionRef} id="about" className="relative w-full h-screen flex items-center justify-center pointer-events-none px-6 overflow-hidden">
+    <section ref={sectionRef} id="about" className="relative w-full h-screen flex items-center justify-center pointer-events-none px-4 sm:px-6 overflow-hidden">
       
       {/* Floating Adjectives */}
       <div className="floating-adj absolute top-[20%] left-[40%] font-serif italic text-white/5 sm:text-white/10 text-2xl sm:text-4xl pointer-events-none z-0 hidden sm:block">Precision</div>
       <div className="floating-adj absolute bottom-[20%] left-[15%] font-serif italic text-white/5 sm:text-white/10 text-3xl sm:text-5xl pointer-events-none z-0 hidden sm:block">Curiosity</div>
       
-      <div className="max-w-3xl w-full pointer-events-auto bg-black/50 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-8 md:p-10 z-10 md:mr-auto md:ml-[8%] shadow-[0_0_30px_rgba(255,255,255,0.08)] flex flex-col sm:flex-row gap-5 sm:gap-8 items-center max-h-[85vh] overflow-y-auto sm:overflow-visible">
+      {/* Centered About Card */}
+      <div className="max-w-3xl w-full pointer-events-auto bg-black/50 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-8 md:p-10 z-10 mx-auto shadow-[0_0_30px_rgba(255,255,255,0.08)] flex flex-col sm:flex-row gap-5 sm:gap-8 items-center max-h-[85vh] overflow-y-auto sm:overflow-visible">
         <div className="shrink-0 relative group">
           <div className="w-24 h-32 sm:w-40 sm:h-48 rounded-2xl overflow-hidden border border-white/30 shadow-[0_0_25px_rgba(62,230,168,0.2)] bg-black/60">
             <img 
@@ -83,7 +81,7 @@ export default function AboutSection() {
             <div className="hidden sm:block h-[1px] flex-1 bg-white/10" />
           </h2>
           <p className="about-paragraph text-xs sm:text-base md:text-lg text-gray-300 leading-relaxed font-serif italic">
-            <SplitText text={paragraphText} type="words" />
+            {paragraphText}
           </p>
         </div>
       </div>
