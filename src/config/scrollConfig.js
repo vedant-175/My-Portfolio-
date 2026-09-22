@@ -4,7 +4,7 @@ export const SECTION_CONFIG = [
   { id: 'skills', weight: 1.0, navOffset: 0.5 },
   { id: 'projects', weight: 1.2, navOffset: 0.5 },
   { id: 'achievements', weight: 1.2, navOffset: 0.5 },
-  { id: 'education', weight: 1.0, navOffset: 0.5 },
+  { id: 'education', weight: 1.0, navOffset: 0.65 },
   { id: 'contact', weight: 1.0, navOffset: 0.85 },
 ]
 

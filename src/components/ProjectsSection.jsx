@@ -108,7 +108,7 @@ export default function ProjectsSection() {
               <div className="absolute bottom-0 right-0 border-b border-r border-white/40"></div>
             </div>
 
-            <div className="relative z-10">
+            <div>
               {/* Browser Dots & Live Status */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex gap-1.5 opacity-60">
@@ -125,12 +125,12 @@ export default function ProjectsSection() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-[#3ee6a8] border border-white/20 hover:border-[#3ee6a8] text-gray-200 hover:text-black rounded text-xs font-sans font-semibold transition-all cursor-pointer pointer-events-auto shadow-sm"
-                      title={`Open ${project.title}`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-white/5 hover:bg-[#3ee6a8]/20 border border-white/10 hover:border-[#3ee6a8]/50 rounded text-xs font-sans text-gray-300 hover:text-[#3ee6a8] transition-all"
+                      title="Open Live App"
                     >
-                      <span>Visit App</span>
+                      <span>Visit</span>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </a>
                   )}

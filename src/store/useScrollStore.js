@@ -5,9 +5,15 @@ export const useScrollStore = create((set) => ({
   activeSection: 'hero',
   activeProjectIndex: 0,
   ranges: null,
+  isNavigating: false,
   
   setGlobalProgress: (progress) => set({ globalProgress: progress }),
   setActiveSection: (section) => set({ activeSection: section }),
   setActiveProjectIndex: (index) => set({ activeProjectIndex: index }),
   setRanges: (ranges) => set({ ranges }),
+  setIsNavigating: (isNavigating) => set({ isNavigating }),
 }))
+
+if (typeof window !== 'undefined') {
+  window.__SCROLL_STORE__ = useScrollStore
+}

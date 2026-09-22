@@ -28,19 +28,27 @@ export function useScrollTriggers(containerRef) {
       onUpdate: (self) => {
         setGlobalProgress(self.progress)
         
+        // Skip overriding activeSection during programmatic navbar scrolling
+        if (useScrollStore.getState().isNavigating) {
+          return
+        }
+
+        const storeRanges = useScrollStore.getState().ranges || ranges
+        if (!storeRanges) return
+
         const currentY = self.scroll()
-        const entries = Object.entries(ranges)
+        const entries = Object.entries(storeRanges)
         let foundSection = entries[0]?.[0] || 'hero'
         
         for (let i = 0; i < entries.length; i++) {
           const [id, range] = entries[i]
           if (i === entries.length - 1) {
             // Last section: stays active for all positions from its start through the very bottom and beyond
-            if (currentY >= range.start) {
+            if (currentY >= range.start - 5) {
               foundSection = id
               break
             }
-          } else if (currentY >= range.start && currentY < range.end) {
+          } else if (currentY >= range.start - 5 && currentY < range.end) {
             foundSection = id
             break
           }
@@ -56,9 +64,11 @@ export function useScrollTriggers(containerRef) {
     // Optional: Re-calculate on resize
     const handleResize = () => {
       ScrollTrigger.refresh()
-      const newTotalHeight = containerRef.current.scrollHeight - window.innerHeight
-      const newRanges = computeSectionRanges(newTotalHeight)
-      setRanges(newRanges)
+      if (containerRef.current) {
+        const newTotalHeight = containerRef.current.scrollHeight - window.innerHeight
+        const newRanges = computeSectionRanges(newTotalHeight)
+        setRanges(newRanges)
+      }
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { useScrollStore } from '../store/useScrollStore'
+import { computeSectionRanges } from '../config/scrollConfig'
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 export default function Nav() {
   const activeSection = useScrollStore((state) => state.activeSection)
@@ -19,14 +23,38 @@ export default function Nav() {
 
   const scrollTo = (id) => {
     setIsOpen(false)
-    const range = useScrollStore.getState().ranges[id]
-    if (range) {
+    const store = useScrollStore.getState()
+    
+    // 1. Immediately switch active section so Education renders immediately
+    store.setIsNavigating(true)
+    store.setActiveSection(id)
+
+    // 2. Resolve ranges safely with fallback so it never errors
+    let ranges = store.ranges
+    if (!ranges) {
+      const scrollEl = document.scrollingElement || document.documentElement
+      const totalHeight = scrollEl ? scrollEl.scrollHeight - window.innerHeight : window.innerHeight * 4
+      ranges = computeSectionRanges(totalHeight)
+      store.setRanges(ranges)
+    }
+
+    const targetRange = ranges?.[id]
+    if (targetRange) {
+      gsap.killTweensOf(window)
       gsap.to(window, {
-        duration: 1.5,
-        scrollTo: range.navTarget,
-        ease: 'power3.inOut'
+        duration: 0.85,
+        scrollTo: targetRange.navTarget,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          setTimeout(() => {
+            store.setIsNavigating(false)
+            store.setActiveSection(id)
+            ScrollTrigger.refresh()
+          }, 50)
+        }
       })
-      setTimeout(() => ScrollTrigger.refresh(), 50)
+    } else {
+      store.setIsNavigating(false)
     }
   }
 
