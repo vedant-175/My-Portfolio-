@@ -108,7 +108,7 @@ export default function ProjectsSection() {
               <div className="absolute bottom-0 right-0 border-b border-r border-white/40"></div>
             </div>
 
-            <div>
+            <div className="relative z-10">
               {/* Browser Dots & Live Status */}
               <div className="flex items-center justify-between mb-3">
                 <div className="flex gap-1.5 opacity-60">
@@ -125,25 +125,39 @@ export default function ProjectsSection() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-2.5 py-1 bg-white/5 hover:bg-[#3ee6a8]/20 border border-white/10 hover:border-[#3ee6a8]/50 rounded text-xs font-sans text-gray-300 hover:text-[#3ee6a8] transition-all"
-                      title="Open Live App"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-[#3ee6a8] border border-white/20 hover:border-[#3ee6a8] text-gray-200 hover:text-black rounded text-xs font-sans font-semibold transition-all cursor-pointer pointer-events-auto shadow-sm"
+                      title={`Open ${project.title}`}
                     >
-                      <span>Visit</span>
+                      <span>Visit App</span>
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </a>
                   )}
                 </div>
               </div>
 
-              {/* Tagline & Title */}
-              <h3 className="text-xl sm:text-2xl font-serif text-white mb-1 group-hover:text-[#3ee6a8] transition-colors">
-                {project.title}
-              </h3>
-              <p className="text-xs uppercase tracking-widest text-gray-400 font-sans mb-3 font-semibold">
-                {project.tagline}
-              </p>
+              {/* Tagline & Title as Clickable Link */}
+              <div className="mb-2">
+                {project.link ? (
+                  <a 
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 group/title text-xl sm:text-2xl font-serif text-white hover:text-[#3ee6a8] transition-colors cursor-pointer pointer-events-auto"
+                  >
+                    <span>{project.title}</span>
+                    <span className="text-sm font-sans text-[#3ee6a8] opacity-75 group-hover/title:opacity-100 group-hover/title:translate-x-0.5 group-hover/title:-translate-y-0.5 transition-all">↗</span>
+                  </a>
+                ) : (
+                  <h3 className="text-xl sm:text-2xl font-serif text-white">
+                    {project.title}
+                  </h3>
+                )}
+                <p className="text-xs uppercase tracking-widest text-gray-400 font-sans mt-0.5 font-semibold">
+                  {project.tagline}
+                </p>
+              </div>
 
               {/* Description */}
               <p className="text-gray-300 font-serif italic text-xs sm:text-sm leading-relaxed mb-4">
@@ -166,9 +180,9 @@ export default function ProjectsSection() {
               </div>
             </div>
 
-            {/* Tech Stack */}
-            <div className="pt-3 border-t border-white/10">
-              <div className="flex flex-wrap gap-1.5">
+            {/* Tech Stack & Direct Action Button */}
+            <div className="pt-3 border-t border-white/10 relative z-10">
+              <div className="flex flex-wrap gap-1.5 mb-3">
                 {project.stack.map((tech, tIdx) => (
                   <span 
                     key={tIdx} 
@@ -178,6 +192,18 @@ export default function ProjectsSection() {
                   </span>
                 ))}
               </div>
+
+              {project.link && (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full py-2 px-3 bg-white/5 hover:bg-[#3ee6a8] text-gray-300 hover:text-black border border-white/10 hover:border-[#3ee6a8] rounded-lg text-xs font-sans font-bold uppercase tracking-wider transition-all duration-300 pointer-events-auto cursor-pointer group/btn"
+                >
+                  <span>Launch {project.title}</span>
+                  <span className="text-sm group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">↗</span>
+                </a>
+              )}
             </div>
 
           </div>
