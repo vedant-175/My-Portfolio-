@@ -180,9 +180,9 @@ export default function ProjectsSection() {
               </div>
             </div>
 
-            {/* Tech Stack & Direct Action Button */}
+            {/* Tech Stack */}
             <div className="pt-3 border-t border-white/10 relative z-10">
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-1.5">
                 {project.stack.map((tech, tIdx) => (
                   <span 
                     key={tIdx} 
@@ -192,18 +192,6 @@ export default function ProjectsSection() {
                   </span>
                 ))}
               </div>
-
-              {project.link && (
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2 px-3 bg-white/5 hover:bg-[#3ee6a8] text-gray-300 hover:text-black border border-white/10 hover:border-[#3ee6a8] rounded-lg text-xs font-sans font-bold uppercase tracking-wider transition-all duration-300 pointer-events-auto cursor-pointer group/btn"
-                >
-                  <span>Launch {project.title}</span>
-                  <span className="text-sm group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform">↗</span>
-                </a>
-              )}
             </div>
 
           </div>
